@@ -1,9 +1,18 @@
+/** *
+ * Added exceptions and Added A system.log to log exception details, including the timestamp, exception type, message, and stack trace
+ * 
+ * Author: Rediet Teklay
+*/
+
+
 package chatApplication;
 
 import java.util.Scanner;
 
+import exception.CustomExceptionHandler;
+
 public class MainClass {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CustomExceptionHandler {
         Scanner scanner = new Scanner(System.in);
 
         String publicFilePath = "C:\\Users\\hp\\Documents\\gebaya\\spring\\chatApplication\\files\\Eurakarte.log";
@@ -47,7 +56,7 @@ public class MainClass {
         scanner.close();
     }
 
-    private static void manageFriends(FriendList friendList, Scanner scanner) {
+    private static void manageFriends(FriendList friendList, Scanner scanner) throws CustomExceptionHandler {
         System.out.println("Do you want to (1) View Friends or (2) Add a Friend? Enter 1 or 2: ");
         int choice = scanner.nextInt();
 
@@ -60,11 +69,11 @@ public class MainClass {
             friendList.addFriend(fullName);
             System.out.println("Friend added to the list.");
         } else {
-            System.out.println("Invalid choice. Please enter 1 to View Friends or 2 to Add a Friend.");
+            throw new CustomExceptionHandler("Invalid choice. Please enter 1 to View Friends or 2 to Add a Friend.");
         }
     }
 
-    private static void chatInPublic(PublicChat pubChat, Scanner scanner) {
+    private static void chatInPublic(PublicChat pubChat, Scanner scanner) throws CustomExceptionHandler {
         System.out.println("Choose an action: ");
         System.out.println("(1) Read in Public Chat");
         System.out.println("(2) Write in Public Chat");
@@ -80,11 +89,11 @@ public class MainClass {
             String message = scanner.nextLine();
             pubChat.writePublicChat("New public message: " + message);
         } else {
-            System.out.println("Invalid choice. Please enter 1 to Read or 2 to Write.");
+            throw new CustomExceptionHandler("Invalid choice. Please enter 1 to Read or 2 to Write.");
         }
     }
 
-    private static void chatInPrivate(PrivateMessage privateChat, Scanner scanner) {
+    private static void chatInPrivate(PrivateMessage privateChat, Scanner scanner) throws CustomExceptionHandler {
         System.out.println("Choose an action: ");
         System.out.println("(1) Read in Private Chat");
         System.out.println("(2) Write in Private Chat");
@@ -100,7 +109,7 @@ public class MainClass {
             String message = scanner.nextLine();
             privateChat.writePrivateMessage("New private message: " + message);
         } else {
-            System.out.println("Invalid choice. Please enter 1 to Read or 2 to Write.");
+            throw new CustomExceptionHandler("Invalid choice. Please enter 1 to Read or 2 to Write.");
         }
     }
 }

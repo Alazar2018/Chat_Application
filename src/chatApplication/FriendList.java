@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.SystemExceptionHandler;
+
 public class FriendList {
     private String filePath;
     private List<String> friends;
@@ -22,8 +24,10 @@ public class FriendList {
                 friends.add(line);
             }
         } catch (FileNotFoundException e) {
+            SystemExceptionHandler.hadleException(e);
             System.out.println("Friend list file not found: " + e.getMessage());
         } catch (IOException e) {
+            SystemExceptionHandler.hadleException(e);
             e.printStackTrace();
         }
     }
@@ -39,9 +43,11 @@ public class FriendList {
                 friendListWriter.write(friendEntry);
                 friendListWriter.newLine();
             } catch (IOException e) {
+                SystemExceptionHandler.hadleException(e);
                 e.printStackTrace();
             }
         } catch (Exception e) {
+            SystemExceptionHandler.hadleException(e);
             e.printStackTrace();
         }
     }

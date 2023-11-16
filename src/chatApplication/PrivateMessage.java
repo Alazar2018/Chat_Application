@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.SystemExceptionHandler;
+
 public class PrivateMessage {
     private String filePath;
     private List<String> messages;
@@ -21,8 +23,10 @@ public class PrivateMessage {
                 messages.add(line);
             }
         } catch (FileNotFoundException e) {
+            SystemExceptionHandler.hadleException(e);
             System.out.println("Private Chat file not found: " + e.getMessage());
         } catch (IOException e) {
+            SystemExceptionHandler.hadleException(e);
             e.printStackTrace();
         }
     }
@@ -33,6 +37,7 @@ public class PrivateMessage {
             privateChat.newLine();
             messages.add(message);
         } catch (IOException e) {
+            SystemExceptionHandler.hadleException(e);
             e.printStackTrace();
         }
     }
